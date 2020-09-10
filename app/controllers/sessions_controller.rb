@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :forbid_login_user, only: [:new, :create]
+
   def new
   end
 
@@ -17,7 +19,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     flash[:success] = 'ログアウトしました。'
-    redirect_to root_url
+    redirect_to login_url
   end
   
   private

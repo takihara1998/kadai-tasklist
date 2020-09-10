@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
   def counts(user)
     @count_tasks = user.tasks.count
   end
+  
+  def forbid_login_user
+    if session[:user_id] != nil
+      flash[:danger] = "すでにログインしています！"
+      redirect_to root_url
+    end
+  end
 end
