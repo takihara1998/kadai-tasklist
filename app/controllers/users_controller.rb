@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:show]
+  before_action :ensure_correct_user, only: [:show]
   before_action :forbid_login_user, only: [:new, :create]
-  
-  def index
-    @users = User.order(id: :desc).page(params[:page]).per(25)
-  end
 
   def show
     @user = User.find(params[:id])
